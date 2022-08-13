@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 services:
   foundryvtt:
     container_name: foundryvtt
@@ -17,6 +17,17 @@ services:
       - ./:/app/tinyfilemanager/data
       - ./tinyfilemanager-config.php:/app/tinyfilemanager/config.php
 
+  wiki:
+    container_name: wiki
+    image: linuxserver/dokuwiki
+    restart: always
+    environment:
+      PUID: 1000
+      PGID: 1000
+      TZ: Asia/Seoul
+    volumes:
+      - ./wiki:/config
+
   https-portal:
     container_name: https-portal
     image: steveltn/https-portal:1.17.5
@@ -28,7 +39,7 @@ services:
       STAGE: production
       PROXY_READ_TIMEOUT: 3600
       CLIENT_MAX_BODY_SIZE: 10G
-      WEBSOCKET: 'true'
+      WEBSOCKET: "true"
     volumes:
       - ssl-certs:/var/lib/https-portal
 

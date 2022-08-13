@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 services:
   foundryvtt:
     container_name: foundryvtt
@@ -20,3 +20,16 @@ services:
     volumes:
       - ./:/app/tinyfilemanager/data
       - ./tinyfilemanager-config.php:/app/tinyfilemanager/config.php
+
+  wiki:
+    container_name: wiki
+    image: linuxserver/dokuwiki
+    ports:
+      - "8000:8000"
+    restart: always
+    environment:
+      PUID: 1000
+      PGID: 1000
+      TZ: Asia/Seoul
+    volumes:
+      - ./wiki:/config
